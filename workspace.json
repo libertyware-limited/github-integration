@@ -1,0 +1,135 @@
+{
+  "version": 2,
+  "projects": {
+    "connect-to-github": {
+      "root": "apps/connect-to-github",
+      "sourceRoot": "apps/connect-to-github/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/connect-to-github",
+            "index": "apps/connect-to-github/src/index.html",
+            "main": "apps/connect-to-github/src/main.tsx",
+            "polyfills": "apps/connect-to-github/src/polyfills.ts",
+            "tsConfig": "apps/connect-to-github/tsconfig.app.json",
+            "assets": [
+              "apps/connect-to-github/src/favicon.ico",
+              "apps/connect-to-github/src/assets"
+            ],
+            "styles": [
+              "apps/connect-to-github/src/styles.scss"
+            ],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/connect-to-github/src/environments/environment.ts",
+                  "with": "apps/connect-to-github/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "connect-to-github:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "connect-to-github:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/connect-to-github/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/connect-to-github"
+          ],
+          "options": {
+            "jestConfig": "apps/connect-to-github/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "connect-to-github-e2e": {
+      "root": "apps/connect-to-github-e2e",
+      "sourceRoot": "apps/connect-to-github-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/connect-to-github-e2e/cypress.json",
+            "tsConfig": "apps/connect-to-github-e2e/tsconfig.e2e.json",
+            "devServerTarget": "connect-to-github:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "connect-to-github:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/connect-to-github-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "connect-to-github"
+}
