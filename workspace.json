@@ -25,7 +25,7 @@
               "apps/connect-to-github/src/styles.scss"
             ],
             "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
+            "webpackConfig": "apps/connect-to-github/webpack.config.js"
           },
           "configurations": {
             "production": {
@@ -55,7 +55,8 @@
         "serve": {
           "executor": "@nrwl/web:dev-server",
           "options": {
-            "buildTarget": "connect-to-github:build"
+            "buildTarget": "connect-to-github:build",
+            "webpackConfig": "apps/connect-to-github/webpack.config.js"
           },
           "configurations": {
             "production": {
